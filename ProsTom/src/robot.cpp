@@ -31,9 +31,12 @@ void setup_bot()
   leftFront.set_encoder_units(E_MOTOR_ENCODER_DEGREES);
   leftMiddle.set_encoder_units(E_MOTOR_ENCODER_DEGREES);
   leftBack.set_encoder_units(E_MOTOR_ENCODER_DEGREES);
-  claw.set_encoder_units(E_MOTOR_ENCODER_ROTATIONS);
+  claw.set_encoder_units(E_MOTOR_ENCODER_DEGREES);
   rightLift.set_encoder_units(E_MOTOR_ENCODER_DEGREES);
   leftLift.set_encoder_units(E_MOTOR_ENCODER_DEGREES);
+  claw.tare_position();
+  rightLift.tare_position();
+  leftLift.tare_position();
   // Right.set_pos_pid(pid1);
   // Right.set_pos_pid(pid1);
   // Right.set_pos_pid(pid1);

@@ -144,7 +144,8 @@ void flywheel_control_screen()
 
 void rpm_meter_updater()
 {
-  flywheel_rpm = get_flywheel_avg_rpm();
+  // flywheel_rpm = get_flywheel_avg_rpm();
+  flywheel_rpm = rightLift.get_position();
   output_val = std::to_string(flywheel_rpm);
   lv_lmeter_set_value(rpm_meter, flywheel_rpm);
   lv_label_set_text(rpm_label, output_val.c_str());

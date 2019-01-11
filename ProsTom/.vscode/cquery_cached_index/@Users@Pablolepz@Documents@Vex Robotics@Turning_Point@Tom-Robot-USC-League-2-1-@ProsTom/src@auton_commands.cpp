@@ -5,7 +5,6 @@
 //#################Variables###########################
 //Please add variables in your spaces for easy identification.
 
-int x = 9001; //this is an example
 int wheelRadius = 2;
 int tarDeg;
 int testRatio = 5; //
@@ -28,12 +27,12 @@ int degrees_to_inches(double degrees)
 
 int get_curr_dist_trvld ()
 {
-  double total = right_motor1.get_position();
-  total = total + right_motor2.get_position();
-  total = total + right_motor3.get_position();
-  total = total + left_motor1.get_position();
-  total = total + left_motor2.get_position();
-  total = total + left_motor3.get_position();
+  double total = rightFront.get_position();
+  total = total + rightMiddle.get_position();
+  total = total + rightBack.get_position();
+  total = total + leftFront.get_position();
+  total = total + leftMiddle.get_position();
+  total = total + leftBack.get_position();
 
   avg_dist = total/6;
 
@@ -58,7 +57,7 @@ void move_fork(int deg, int rpm)
   */
   // while(endEff_motor.is_stopped() != 1)
   // {
-    endEff_motor.move_absolute(deg, rpm);
+    claw.move_absolute(deg, rpm);
   // }
   // endEff_motor.move(0);
 
@@ -66,21 +65,21 @@ void move_fork(int deg, int rpm)
 }
 void intake_stop()
 {
-  intake_motor.move_velocity(0);
+  intake.move_velocity(0);
 }
 
 void intake_in()
 {
   /*Turn the intake on to take in balls.
   */
-  intake_motor.move_velocity(-200);
+  intake.move_velocity(-200);
 }
 
 void intake_out()
 {
   /*Turn the intake on to take out balls.
   */
-  intake_motor.move_velocity(200);
+  intake.move_velocity(200);
 
 }
 
@@ -100,25 +99,25 @@ void shoot_ball()
   Once its done shooting, the flywheel should be reduced to 0 rpm or to some minimum speed
   such as 100 as an idle mode. Low rpm = low motor usage = more battery life.
   */
-  flywheel_motor1.move_velocity(200);
-  flywheel_motor2.move_velocity(200);
+  topFlywheel.move_velocity(200);
+  bottomFlywheel.move_velocity(200);
   delay(3200);
   intake_in();
   delay(500);
   intake_stop();
-  flywheel_motor1.move(0);
-  flywheel_motor2.move(0);
+  topFlywheel.move(0);
+  bottomFlywheel.move(0);
 }
 void shoot_ball(int speed)
 {
-  flywheel_motor1.move_velocity(speed);
-  flywheel_motor2.move_velocity(speed);
+  topFlywheel.move_velocity(speed);
+  bottomFlywheel.move_velocity(speed);
   delay(3200);
   intake_in();
   delay(500);
   intake_stop();
-  flywheel_motor1.move(0);
-  flywheel_motor2.move(0);
+  topFlywheel.move(0);
+  bottomFlywheel.move(0);
 }
 
 void tester_print_screen(int switcher, int speed)
@@ -141,15 +140,15 @@ void shoot_ball_test()
 {
   bool next = true;
   int rpm = 200;
-  flywheel_motor1.move_velocity(rpm);
-  flywheel_motor2.move_velocity(rpm);
+  topFlywheel.move_velocity(rpm);
+  bottomFlywheel.move_velocity(rpm);
   delay(3200);
   intake_in();
   for(int c = 0; c < 13; c++)
   {
 
-    flywheel_motor1.move_velocity(rpm - (c * testRatio));
-    flywheel_motor2.move_velocity(rpm - (c * testRatio));
+    topFlywheel.move_velocity(rpm - (c * testRatio));
+    bottomFlywheel.move_velocity(rpm - (c * testRatio));
     delay(2000);
     // if (next == true)
     // {
@@ -164,14 +163,14 @@ void shoot_ball_test()
     intake_stop();
     next = !next;
   }
-  flywheel_motor1.move(0);
-  flywheel_motor2.move(0);
+  topFlywheel.move(0);
+  bottomFlywheel.move(0);
 }
 
 void flywheel_set(int rpm)
 {
-  flywheel_motor1.move_velocity(rpm);
-  flywheel_motor2.move_velocity(rpm);
+  topFlywheel.move_velocity(rpm);
+  bottomFlywheel.move_velocity(rpm);
 }
 
 //################ Movement##########################
@@ -184,12 +183,12 @@ void reset_chassis_encoders()
   // right_motor1.set_zero_position(right_motor1.get_position());
   // right_motor2.set_zero_position(right_motor2.get_position());
   // right_motor3.set_zero_position(right_motor3.get_position());
-  left_motor1.set_zero_position(0);
-  left_motor2.set_zero_position(0);
-  left_motor3.set_zero_position(0);
-  right_motor1.set_zero_position(0);
-  right_motor2.set_zero_position(0);
-  right_motor3.set_zero_position(0);
+  leftFront.set_zero_position(0);
+  leftMiddle.set_zero_position(0);
+  leftBack.set_zero_position(0);
+  rightFront.set_zero_position(0);
+  rightMiddle.set_zero_position(0);
+  rightBack.set_zero_position(0);
 }
 
 void move_forward(int inch)
@@ -211,18 +210,27 @@ void move_forward(int inch, int rpm)
   //same as move_forward but user can include the rpm
   delay(2);
   tarDeg = inches_to_degrees(inch);
-  right_motor1.move_absolute(tarDeg, rpm);
-  right_motor2.move_absolute(tarDeg, rpm);
-  right_motor3.move_absolute(tarDeg, rpm);
-  left_motor1.move_absolute(tarDeg, rpm);
-  left_motor2.move_absolute(tarDeg, rpm);
-  left_motor3.move_absolute(tarDeg, rpm);
+  rightFront.move_absolute(tarDeg, rpm);
+  rightMiddle.move_absolute(tarDeg, rpm);
+  rightBack.move_absolute(tarDeg, rpm);
+  leftFront.move_absolute(tarDeg, rpm);
+  leftMiddle.move_absolute(tarDeg, rpm);
+  leftBack.move_absolute(tarDeg, rpm);
 
 }
 
 void move_backward(int inch, int rpm)
 {
   //same as move_forward but user can include the rpm
+  reset_chassis_encoders();
+  delay(2);
+  tarDeg = inches_to_degrees(inch);
+  rightFront.move_absolute(-tarDeg, rpm);
+  rightMiddle.move_absolute(-tarDeg, rpm);
+  rightBack.move_absolute(-tarDeg, rpm);
+  leftFront.move_absolute(-tarDeg, rpm);
+  leftMiddle.move_absolute(-tarDeg, rpm);
+  leftBack.move_absolute(-tarDeg, rpm);
 
 }
 
