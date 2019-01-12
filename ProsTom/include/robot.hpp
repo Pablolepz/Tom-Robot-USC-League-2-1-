@@ -25,6 +25,9 @@ extern int get_FW_KF();
 extern int get_FW_KP();
 extern int get_FW_KI();
 extern int get_FW_KD();
+extern void set_gyro_tar(int val);
+extern void set_gyro_val(int val);
 extern int get_gyro_val();
+extern int get_gyro_target();
 
 #endif

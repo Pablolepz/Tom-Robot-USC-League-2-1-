@@ -85,7 +85,11 @@ void opcontrol(void);
 
 #include "drive.hpp"
 #include "robot.hpp"
+#include "gyroscope.hpp"
 #include "auton_run_screen.hpp"
+#include "auton_scripts.hpp"
+#include "auton_commands.hpp"
+
 
 #endif
 

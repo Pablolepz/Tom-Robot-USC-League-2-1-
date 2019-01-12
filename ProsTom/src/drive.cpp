@@ -116,7 +116,7 @@ void run_claw (void* pntr4)
 
 void run_pneu()
 {
-  if ((master.get_digital(DIGITAL_A) == 1) && ((millis() - timer_set) > 200))
+  if ((master.get_digital(DIGITAL_A) == 1) && ((millis() - timer_set) > 175))
   {
     timer_set = millis();
     if (clawOn == 1)

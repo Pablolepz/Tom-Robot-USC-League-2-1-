@@ -22,8 +22,8 @@ extern void move_forward(int inch);
 extern void move_backward(int inch);
 extern void move_forward(int inch, int rpm);
 extern void move_backward(int inch, int rpm);
-extern void turn_left(int deg);
-extern void turn_right(int deg);
+extern void turn_left(int deg, int rpm);
+extern void turn_right(int deg, int rpm);
 
 
 #endif

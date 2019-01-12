@@ -9,6 +9,7 @@ int wheelRadius = 2;
 int tarDeg;
 int testRatio = 5; //
 double avg_dist;
+float difference = 0;
 
 int inches_to_degrees(int inches)
 {
@@ -208,7 +209,7 @@ void move_forward(int inch, int rpm)
 {
   reset_chassis_encoders();
   //same as move_forward but user can include the rpm
-  delay(2);
+  //delay(2);
   tarDeg = inches_to_degrees(inch);
   rightFront.move_absolute(tarDeg, rpm);
   rightMiddle.move_absolute(tarDeg, rpm);
@@ -216,14 +217,17 @@ void move_forward(int inch, int rpm)
   leftFront.move_absolute(tarDeg, rpm);
   leftMiddle.move_absolute(tarDeg, rpm);
   leftBack.move_absolute(tarDeg, rpm);
-
+  while(abs(rightMiddle.get_position()) - abs(rightMiddle.get_target_position()) > 5)
+  {
+    delay(2);
+  }
 }
 
 void move_backward(int inch, int rpm)
 {
   //same as move_forward but user can include the rpm
   reset_chassis_encoders();
-  delay(2);
+  //delay(2);
   tarDeg = inches_to_degrees(inch);
   rightFront.move_absolute(-tarDeg, rpm);
   rightMiddle.move_absolute(-tarDeg, rpm);
@@ -231,16 +235,48 @@ void move_backward(int inch, int rpm)
   leftFront.move_absolute(-tarDeg, rpm);
   leftMiddle.move_absolute(-tarDeg, rpm);
   leftBack.move_absolute(-tarDeg, rpm);
-
+  while(abs(rightMiddle.get_position()) - abs(rightMiddle.get_target_position()) > 5)
+  {
+    delay(2);
+  }
 }
 
-void turn_left(int deg)
-{
+// void turn_to(int deg)
+// {
+//   gyroSens.set_gyro_target(deg);
+//   difference = deg - get_gyro_val();
+//   while(get_gyro_output > 20)
+//   {
+//     if (deg - get_gyro_val)
+//     {
+//
+//     }
+//   }
+// }
 
+
+void turn_left(int deg, int rpm)
+{
+  reset_chassis_encoders();
+  tarDeg = (deg * .67) * 12.56;
+
+  rightFront.move_absolute(tarDeg, rpm);
+  rightMiddle.move_absolute(tarDeg, rpm);
+  rightBack.move_absolute(tarDeg, rpm);
+  leftFront.move_absolute(-tarDeg, rpm);
+  leftMiddle.move_absolute(-tarDeg, rpm);
+  leftBack.move_absolute(-tarDeg, rpm);
 }
 
-void turn_right(int deg)
+void turn_right(int deg, int rpm)
 {
+  reset_chassis_encoders();
   //turns the bot right
-
+  tarDeg = (deg * .67) * 12.56;
+  rightFront.move_absolute(-tarDeg, rpm);
+  rightMiddle.move_absolute(-tarDeg, rpm);
+  rightBack.move_absolute(-tarDeg, rpm);
+  leftFront.move_absolute(tarDeg, rpm);
+  leftMiddle.move_absolute(tarDeg, rpm);
+  leftBack.move_absolute(tarDeg, rpm);
 }

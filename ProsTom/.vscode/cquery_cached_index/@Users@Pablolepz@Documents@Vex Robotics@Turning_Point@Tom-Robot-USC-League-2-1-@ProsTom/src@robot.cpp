@@ -5,14 +5,21 @@
 #define FW_KP 1.0f
 #define FW_KI 0.0f
 #define FW_KD 0.0f
+int GYRO_TAR;
 
 Controller master(pros::E_CONTROLLER_MASTER);
-Motor rightFront(10, true);
-Motor rightMiddle(9, false);
-Motor rightBack(8, true);
 Motor leftFront(7, false);
 Motor leftMiddle(6, true);
 Motor leftBack(5, false);
+Motor rightFront(10, true);
+Motor rightMiddle(9, false);
+Motor rightBack(8, true);
+// Motor leftFront(10, true);
+// Motor leftMiddle(9, false);
+// Motor leftBack(8, true);
+// Motor rightFront(7, false);
+// Motor rightMiddle(6, true);
+// Motor rightBack(5, false);
 Motor intake(11, false);
 Motor topFlywheel(13, true);
 Motor bottomFlywheel(12, false);
@@ -37,6 +44,12 @@ void setup_bot()
   claw.tare_position();
   rightLift.tare_position();
   leftLift.tare_position();
+  rightFront.tare_position();
+  rightMiddle.tare_position();
+  rightBack.tare_position();
+  leftFront.tare_position();
+  leftMiddle.tare_position();
+  leftBack.tare_position();
   // Right.set_pos_pid(pid1);
   // Right.set_pos_pid(pid1);
   // Right.set_pos_pid(pid1);
@@ -74,7 +87,22 @@ int get_FW_KD()
   return FW_KD;
 }
 
-extern int get_gyro_val()
+void set_gyro_tar(int val)
+{
+  GYRO_TAR = val;
+}
+
+int get_gyro_val()
 {
   return gyroSens.get_value();
+}
+
+void set_gyro_val(int val)
+{
+  gyroSens.reset();
+}
+
+int get_gyro_target()
+{
+  return GYRO_TAR;
 }

@@ -13,5 +13,8 @@
  */
 void autonomous() {
 
+  Task run_brain_screen (run_general_screen, (void*) "pntr2", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT, "Flywheel screen");
+  Task run_gyro_PID (gyro_PID, (void*) "gyro_controller", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT, "Gyroscope");
+  run_auton();
 
 }
