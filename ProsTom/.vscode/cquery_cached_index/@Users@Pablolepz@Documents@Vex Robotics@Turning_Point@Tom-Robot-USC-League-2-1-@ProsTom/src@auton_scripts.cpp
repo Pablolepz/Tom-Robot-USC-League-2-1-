@@ -8,11 +8,12 @@
 void run_auton()
 {
 
-  NEW_red_auton_one();
+  //NEW_red_auton_one();
   //auton_tester();
   //red_auton_one();
   //red_auton_two();
   //red_auton_three();
+  blue_auton_one();
   /*switch(choice)
     case 1:
       blue_auton_one();
@@ -74,45 +75,45 @@ void auton_tester()
 //##########################################################################################
 void NEW_red_auton_one()
 {
+  delay(20);
   flywheel_set(200);
   delay(20);
   move_forward(5,40);
   delay(3000);
   intake_in();
-  delay(1000);
-  intake_stop();
-  delay(20);
+  delay(1500);
   intake_stop();
   delay(20);
   turn_left(4, 90);
   delay(20);
   move_forward(50, 100);
-  //===========================
-  move_forward(10, 100);
-  delay(1000);
-  move_forward(45, 200);
-  delay(1000);
-  intake_in();
-  delay(1000);
-  intake_stop();
-  move_backward(65, 110);
-  delay(3000);
-  move_forward(1,30);
-  delay(1000);
-  turn_left(93, 100);
-  delay(1000);
-  flywheel_set(200);
-  move_forward(5, 40);
-  delay(1000);
-  turn_right(4, 40);
-  delay(1000);
-  intake_in();
-  delay(2000);
-  intake_stop();
   flywheel_set(0);
-  delay(20);
-  move_forward(60, 200);
-  delay(1000);
+  //===========================
+  // move_forward(10, 100);
+  // delay(1000);
+  // move_forward(45, 200);
+  // delay(1000);
+  // intake_in();
+  // delay(1000);
+  // intake_stop();
+  // move_backward(65, 110);
+  // delay(3000);
+  // move_forward(1,30);
+  // delay(1000);
+  // turn_left(93, 100);
+  // delay(1000);
+  // flywheel_set(200);
+  // move_forward(5, 40);
+  // delay(1000);
+  // turn_right(4, 40);
+  // delay(1000);
+  // intake_in();
+  // delay(2000);
+  // intake_stop();
+  // flywheel_set(0);
+  // delay(20);
+  // move_forward(60, 200);
+  // delay(1000);
   // while (get_curr_dist_trvld() < 30)
   // {
   // }
@@ -129,7 +130,19 @@ void NEW_red_auton_one()
 
 void blue_auton_one()
 {
-
+  flywheel_set(200);
+  delay(20);
+  move_forward(5,40);
+  delay(3000);
+  intake_in();
+  delay(1500);
+  intake_stop();
+  delay(20);
+  intake_stop();
+  delay(20);
+  turn_right(4, 90);
+  delay(20);
+  move_forward(50, 100);
 }
 
 void blue_auton_two()
