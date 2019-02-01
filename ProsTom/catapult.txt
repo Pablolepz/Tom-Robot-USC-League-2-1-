@@ -1,4 +1,0 @@
-start catapult on slip,
-once torque is detected,
-start counting up to 240
-once passed 
